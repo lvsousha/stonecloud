@@ -38,5 +38,15 @@
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<!-- 持久层 采用mybatis -->
+    <bean id="sqlSessionFactoryBeanName" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:mybatis.xml" />
+        <property name="typeAliasesPackage" value="com.stone.webapp.mapper" />
+        <property name="mapperLocations" value="classpath*:mapper/*.xml" />
+    </bean>      
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.stone.webapp.mapper"/>
+    </bean>
 	
 </beans>
