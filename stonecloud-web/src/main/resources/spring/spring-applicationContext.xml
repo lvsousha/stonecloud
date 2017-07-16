@@ -48,5 +48,13 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.stone.webapp.mapper"/>
     </bean>
+    
+    <!-- transaction support-->
+	<!-- PlatformTransactionMnager -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	    <property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- enable transaction annotation support -->
+	<tx:annotation-driven transaction-manager="txManager" />
 	
 </beans>
