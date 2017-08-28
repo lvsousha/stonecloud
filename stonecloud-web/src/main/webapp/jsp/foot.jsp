@@ -17,6 +17,8 @@
     <!-- jQuery custom content scroller -->
     <script src="${resource}/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js?rand=${rand}"></script>
 
+    <script src="${resource}/DataTables-1.10.15/media/js/jquery.dataTables.min.js?rand=${rand}"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="${resource}/app/custom.min.js?rand=${rand}"></script>
 	

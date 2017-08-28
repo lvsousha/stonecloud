@@ -31,6 +31,8 @@
     <!-- jQuery custom content scroller -->
     <link href="${resource}/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css?rand=${rand}" rel="stylesheet"/>
 
+	<link href="${resource}/DataTables-1.10.15/media/css/jquery.dataTables.min.css?rand=${rand}" rel="stylesheet"/>
+
     <!-- Custom Theme Style -->
     <link href="${resource}/app/custom.min.css?rand=${rand}" rel="stylesheet">
 </head>

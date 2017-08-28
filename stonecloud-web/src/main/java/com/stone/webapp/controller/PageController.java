@@ -25,4 +25,10 @@ public class PageController {
 		return "index";
 	}
 	
+	@RequestMapping(value={"/upload"})
+	public String upload(HttpServletRequest request, Model model, RedirectAttributes ra) throws IOException {
+		log.info("controller——index");
+		return "content/upload/index";
+	}
+	
 }

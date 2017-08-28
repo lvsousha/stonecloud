@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-<%@include file="head.jsp"%>
+<%@include file="../../head.jsp"%>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -15,19 +15,11 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-      	<%@include file="left/left.jsp"%>
-      	<%@include file="top/top.jsp"%>
+      	<%@include file="../../left/left.jsp"%>
+      	<%@include file="../../top/top.jsp"%>
 
         <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Fixed Sidebar <small> Just add class <strong>menu_fixed</strong></small></h3>
-              </div>
-            </div>
-          </div>
-        </div>
+        <%@include file="upload.jsp"%>
         <!-- /page content -->
 
         <!-- footer content -->
@@ -42,5 +34,7 @@
     </div>
 
   </body>
-  <%@include file="foot.jsp"%>
+  <%@include file="../../foot.jsp"%>
+  <script src="${resource}/plupload-2.1.9/js/plupload.full.min.js?rand=${rand}"></script>
+  <script src="${resource}/app/upload/js/upload.js?rand=${rand}"></script>
 </html>
