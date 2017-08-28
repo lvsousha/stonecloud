@@ -91,4 +91,10 @@
 	<!-- enable transaction annotation support -->
 	<tx:annotation-driven transaction-manager="txManager" />
 	
+	
+	<!-- 文件上传 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+    	<property name="maxUploadSize" value="11534336" />  
+	</bean>
+	
 </beans>
