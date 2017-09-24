@@ -33,6 +33,16 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>test</servlet-name>
+		<servlet-class>com.stone.webapp.servlet.TestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>test</servlet-name>
+		<url-pattern>/test</url-pattern>
+	</servlet-mapping>
+	
 	<!-- spring字符集过滤器 -->
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
