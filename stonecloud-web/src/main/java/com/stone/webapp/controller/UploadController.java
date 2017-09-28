@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,17 +15,13 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 @Controller
 @RequestMapping("/content/upload/")
@@ -34,9 +29,6 @@ public class UploadController {
 	
 	private Logger log = Logger.getLogger(this.getClass());
 	private static final int BUFFER_SIZE = 2 * 1024;
-	private Gson gson = new GsonBuilder()  
-//				.setDateFormat("yyyy-MM-dd HH:mm:ss")  
-				.create();
 	
 	@RequestMapping(value = "upload")
 	public void localUpLoadProgram(@RequestParam("file") CommonsMultipartFile[] files, HttpServletResponse response, HttpServletRequest request) throws Exception {
@@ -46,27 +38,15 @@ public class UploadController {
 	
 	@ResponseBody
 	@RequestMapping(value = "getUploadedData")
-	public JsonObject getUploadedData(HttpServletResponse response, HttpServletRequest request, String params) throws Exception {
+	public JSONObject getUploadedData(HttpServletResponse response, HttpServletRequest request, String params) throws Exception {
 		System.out.println(params);
-		JsonObject paramsJson = gson.fromJson(params, JsonObject.class);
-		for(Entry<String, JsonElement> e : paramsJson.entrySet()){
-			System.out.println(e.getKey());
-		}
 		
-		JsonObject object = new JsonObject();
-		JsonArray array = new JsonArray();
-//		for(int i=1; i<10; i++){
-//			JsonObject o = new JsonObject();
-//			o.addProperty("fileId", i);
-//			o.addProperty("fileName", "file"+i);
-//			o.addProperty("fileSize", "1000KB");
-//			o.addProperty("progress", i);
-//			array.add(o);
-//		}
-		object.add("data", array);
-		object.addProperty("draw", 1);
-		object.addProperty("recordsTotal", 0);
-		object.addProperty("recordsFiltered", 0);
+		JSONObject object = new JSONObject();
+		JSONArray array = new JSONArray();
+		object.put("data", array);
+		object.put("draw", 1);
+		object.put("recordsTotal", 0);
+		object.put("recordsFiltered", 0);
 		return object;
 	}
 	
