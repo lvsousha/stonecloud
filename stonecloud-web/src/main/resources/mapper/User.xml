@@ -26,8 +26,8 @@
 					#{password,jdbcType=VARCHAR},
 					#{email,jdbcType=VARCHAR},
 					#{phone,jdbcType=VARCHAR},
-					#{created,jdbcType=DATE},
-					#{updated,jdbcType=DATE}
+					#{created},
+					#{updated}
 		)
 	</insert>
 
