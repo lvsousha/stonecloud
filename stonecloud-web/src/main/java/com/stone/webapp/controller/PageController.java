@@ -21,14 +21,20 @@ public class PageController {
 	
 	@RequestMapping(value={"/index",""})
 	public String index(HttpServletRequest request, Model model, RedirectAttributes ra) throws IOException {
-		log.info("controller——index");
+		log.info("index");
 		return "index";
 	}
 	
 	@RequestMapping(value={"/upload"})
 	public String upload(HttpServletRequest request, Model model, RedirectAttributes ra) throws IOException {
-		log.info("controller——index");
+		log.info("upload");
 		return "content/upload/index";
+	}
+	
+	@RequestMapping(value={"/angularjs"})
+	public String angularjs(HttpServletRequest request, Model model, RedirectAttributes ra) throws IOException {
+		log.info("angularjs");
+		return "content/angularjs/index";
 	}
 	
 }
