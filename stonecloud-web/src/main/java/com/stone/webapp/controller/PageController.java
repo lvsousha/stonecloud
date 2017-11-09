@@ -15,9 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class PageController {
 	
 	private Logger log = Logger.getLogger(this.getClass());
-//	private Gson gson = new GsonBuilder()  
-//			  				.setDateFormat("yyyy-MM-dd HH:mm:ss")  
-//			  				.create();
 	
 	@RequestMapping(value={"/index",""})
 	public String index(HttpServletRequest request, Model model, RedirectAttributes ra) throws IOException {
