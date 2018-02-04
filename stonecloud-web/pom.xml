@@ -64,11 +64,16 @@
 			<version>4.10</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- GSON -->
+		<!-- JSON -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.38</version>
 		</dependency>
 	</dependencies>
 	<build>

@@ -12,7 +12,10 @@ public class ServletRequestHandledEventListener implements ApplicationListener<S
 	
 	@Override
 	public void onApplicationEvent(ServletRequestHandledEvent event) {
-		log.info(event.getDescription());
+		String url = event.getRequestUrl();
+		if(url.indexOf("static") == -1){
+			log.info(event.getDescription());
+		}
 //		logger.info(event.getStatusCode());
 		
 	}

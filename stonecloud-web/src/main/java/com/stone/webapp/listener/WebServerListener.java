@@ -18,7 +18,7 @@ public class WebServerListener implements ServletContextListener{
     public void contextInitialized(ServletContextEvent event) {
     	ApplicationContext springContext = WebApplicationContextUtils.getWebApplicationContext(event.getServletContext());
     	
-    	log.info("web容器启动===" +springContext);
+    	log.info("启动项目的执行，web容器启动===" +springContext);
 
     }
     /**

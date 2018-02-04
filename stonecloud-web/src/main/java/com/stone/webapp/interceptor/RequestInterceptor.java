@@ -15,7 +15,7 @@ public class RequestInterceptor implements HandlerInterceptor{
 	
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) throws Exception {
-		log.info(handler.getClass().getName());
+		log.info("在进入Controller之后执行——"+handler.getClass().getName());
 //		Enumeration<String> attributes = request.getAttributeNames();
 //		while(attributes.hasMoreElements()){
 //			System.out.println(attributes.nextElement().toString());
@@ -32,7 +32,7 @@ public class RequestInterceptor implements HandlerInterceptor{
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		log.info(handler.getClass().getName());
+		log.info("在进入Controller之前执行——"+handler.getClass().getName());
 		return true;
 	}
 
