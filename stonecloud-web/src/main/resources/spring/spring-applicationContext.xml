@@ -23,26 +23,94 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="shutdown">
-		<!-- <property name="driverClassName" value="${db.driverClass}" /> --> <!-- 无需指定，除非系统无法自动识别 -->
+	<!-- <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="shutdown">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
 		<property name="jdbcUrl" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
-		<!-- 连接只读数据库时配置为true， 保证安全 -->
+		连接只读数据库时配置为true， 保证安全
 		<property name="readOnly" value="false" />
-		<!-- 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 缺省:30秒 -->
+		等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 缺省:30秒
 		<property name="connectionTimeout" value="30000" />
-		<!-- 一个连接idle状态的最大时长（毫秒），超时则被释放（retired），缺省:10分钟 -->
+		一个连接idle状态的最大时长（毫秒），超时则被释放（retired），缺省:10分钟
 		<property name="idleTimeout" value="600000" />
-		<!-- 一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少30秒，参考MySQL 
-			wait_timeout参数（show variables like '%timeout%';） -->
+		一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少30秒，参考MySQL 
+			wait_timeout参数（show variables like '%timeout%';）
 		<property name="maxLifetime" value="1800000" />
-		<!-- 连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count) -->
+		连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count)
 		<property name="maximumPoolSize" value="15" />
-	</bean>
+	</bean> -->
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+        destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="timeBetweenEvictionRunsMillis" value="1800000" />
+        <property name="removeAbandonedOnBorrow" value="true" />
+        <property name="removeAbandonedTimeout" value="60" />
+        <property name="initialSize" value="5" />
+        <property name="maxTotal" value="50" />
+        <property name="maxWaitMillis" value="9000" />
+        <property name="maxIdle" value="30" />
+        <property name="minIdle" value="5" />
+        <property name="logAbandoned" value="true"></property>
+        <property name="fastFailValidation" value="true" />
+    </bean>
 
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop>
+                <prop key="hibernate.autoReconnect">${hibernate.autoReconnect}</prop>
+                <prop key="hibernate.transaction.auto_close_session">${hibernate.transaction.auto_close_session}</prop>
+                <prop key="hibernate.connection.release_mode">${hibernate.connection.release_mode}</prop>
+                <prop key="current_session_context_class">${hibernate.current_session_context_class}</prop>
+            </props>
+        </property>
+        <property name="packagesToScan" value="com.stone.webapp.model" />
+        <property name="namingStrategy">
+        	<bean class="com.webapp.hibernate.CustNamingStrategy" />
+        </property>
+    </bean>
+    
+    <!-- 创建事务管理器 -->
+    <bean id="txManager"
+        class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <!-- 配置AOP。Spring是通过AOP来进行事务管理的 -->
+    <aop:config>
+        <!-- 设置pointCut表示哪些方法要增加事务处理 -->
+        <!-- 下面的事务是声明在DAO中，可是通常都会在Service来处理多个业务对象逻辑的关系，注入删除，更新等，此时假设在运行了一个步骤之后抛出异常 
+            		就会导致数据不完整，所以事务不应该在DAO层处理，而应该在service。这也就是Spring所提供的一个很方便的工具。声明式事务 -->
+        <aop:pointcut id="allMethods" expression="execution(* com.stone.webapp.service.*.*(..))" />
+        <!-- 通过advisor来确定详细要增加事务控制的方法 -->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="allMethods" />
+    </aop:config>
+    
+    <!-- 配置哪些方法要增加事务控制 -->
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <!-- 让全部的方法都增加事务管理，为了提高效率。能够把一些查询之类的方法设置为仅仅读的事务 -->
+            <tx:method name="*" propagation="REQUIRED" />
+            <!-- 下面方法都是可能设计改动的方法。就无法设置为仅仅读 -->
+            <tx:method name="select*" propagation="REQUIRED" read-only="true" />
+        </tx:attributes>
+    </tx:advice>
+
+	<!-- 开启事务注解 -->
+    <tx:annotation-driven />
 
 </beans>
