@@ -6,6 +6,6 @@ import com.stone.webapp.model.User;
 import com.stone.webapp.model.UserDetail;
 
 @Repository
-public class UserDetailDao extends AbstractDAO<UserDetail>{
+public interface UserDetailDao extends AbstractDAO<UserDetail>{
 
 }

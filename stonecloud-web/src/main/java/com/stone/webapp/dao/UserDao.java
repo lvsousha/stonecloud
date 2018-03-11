@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import com.stone.webapp.model.User;
 
 @Repository
-public class UserDao extends AbstractDAO<User>{
-
+public interface UserDao extends AbstractDAO<User>{
+	
 }
