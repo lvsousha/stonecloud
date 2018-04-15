@@ -50,6 +50,19 @@
 		<filter-name>characterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<!-- Hibernate使用sessionFactory来管理session，我们每进行一次数据库操作时都会新建一个session对象，当我们操作完成后，hibernate就会在dao层立即关闭该session。所以当我们操作类中另一个类的具体属性时，因为session已经关闭，就会报错 -->
+	<filter>
+		<filter-name>hibernateFilter</filter-name>
+		<filter-class>
+			org.springframework.orm.hibernate4.support.OpenSessionInViewFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 
 	<session-config>
 		<session-timeout>30</session-timeout>

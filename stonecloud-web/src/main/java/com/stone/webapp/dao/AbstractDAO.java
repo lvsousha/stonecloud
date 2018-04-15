@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,9 @@ public class AbstractDAO<T> {
 	public void update(Object o) {
 		getSession().update(o);
 		getSession().flush();
+	}
+	
+	public Criteria getCriteria(){
+		return getSession().createCriteria(this.clazz);
 	}
 }

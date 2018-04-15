@@ -18,6 +18,8 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * 用户明细
  */
@@ -30,22 +32,24 @@ public class UserDetail implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private long id;
+	private Long id;
 	private User user;
 	private String sex;
+	private Integer age;
 	private String bloodType;
 	private Date createDate;
 	private Date updateDate;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JSONField(serialize = false)
 	public User getUser() {
 		return user;
 	}
@@ -80,6 +84,12 @@ public class UserDetail implements Serializable {
 	}
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
+	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
 	}
 	
 }

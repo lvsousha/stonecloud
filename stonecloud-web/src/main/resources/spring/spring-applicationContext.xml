@@ -94,9 +94,10 @@
         <tx:attributes>
             <!-- 让全部的方法都增加事务管理，为了提高效率。能够把一些查询之类的方法设置为仅仅读的事务 -->
             <!-- rollack-for 若没有配置该项，则只对运行期异常进行回滚 -->
-            <tx:method name="*" rollback-for="java.lang.Exception" propagation="REQUIRED" />
             <!-- 下面方法都是可能设计改动的方法。就无法设置为仅仅读 -->
             <tx:method name="select*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="get*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="*" rollback-for="java.lang.Exception" propagation="REQUIRED" />
         </tx:attributes>
     </tx:advice>
 

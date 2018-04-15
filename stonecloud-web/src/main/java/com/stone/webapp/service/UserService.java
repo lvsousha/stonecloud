@@ -1,5 +1,7 @@
 package com.stone.webapp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,11 @@ public class UserService {
 		user.setUserName("3");
 		userDao.update(user);
 		throw new RuntimeException();
+	}
+	
+	public List<User> testCriteria(){
+		return userDao.testCriteria();
+		
 	}
 	
 }
