@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Component
 public class RequestInterceptor implements HandlerInterceptor{
 
+	@SuppressWarnings("unused")
 	private Logger log = Logger.getLogger(this.getClass());
 	
 	@Override
