@@ -77,6 +77,12 @@
 		</dependency>
 	</dependencies>
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<finalName>stonecloud</finalName>
 		<plugins>
 			<plugin>
@@ -89,18 +95,35 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.2.8.v20150217</version>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
 				<configuration>
-					<httpConnector>
-						<port>9080</port>
-					</httpConnector>
-					<webApp>
-						<contextPath>/stonecloud</contextPath>
-					</webApp>
+					<path>/stonecloud</path>
+					<port>9080</port>
+					<uriEncoding>utf-8</uriEncoding>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<stone.properties.path>dev</stone.properties.path>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>test</id>
+			<properties>
+				<stone.properties.path>test</stone.properties.path>
+			</properties>
+		</profile>
+
+	</profiles>
 </project>
