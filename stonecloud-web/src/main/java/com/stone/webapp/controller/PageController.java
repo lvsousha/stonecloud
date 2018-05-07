@@ -34,4 +34,10 @@ public class PageController {
 		return "content/angularjs/index";
 	}
 	
+	@RequestMapping(value={"/pdf"})
+	public String pdf(HttpServletRequest request, Model model, RedirectAttributes ra) throws IOException {
+		log.info("pdf");
+		return "content/pdf/index";
+	}
+	
 }
