@@ -35,5 +35,18 @@ public class UserController {
 		userService.insertUser(user);
 		return JSON.parseObject(JSON.toJSONString(user));
 	}
+	
+
+	@RequestMapping("/mybatis-plus/insertUser")
+	@ResponseBody
+	public JSONObject insertUserByMybatisPlus(HttpServletRequest request) throws Exception{
+		log.info("insertUser");
+		User user = new User();
+		user.setCreated(new Date());
+		user.setUpdated(new Date());
+		user.setName("zhengchanglin");
+		userService.insertUserByMybatisPlus(user);
+		return JSON.parseObject(JSON.toJSONString(user));
+	}
 
 }

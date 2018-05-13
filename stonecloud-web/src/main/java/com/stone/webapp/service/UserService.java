@@ -18,4 +18,8 @@ public class UserService {
 		userMapper.insertUser(user);
 	}
 	
+	public void insertUserByMybatisPlus(User user){
+		userMapper.insert(user);
+	}
+	
 }

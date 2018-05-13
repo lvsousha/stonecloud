@@ -3,6 +3,9 @@ package com.stone.webapp.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotations.TableName;
+
+@TableName("USERS")
 public class User implements Serializable{
 	
 	/**
