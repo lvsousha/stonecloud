@@ -36,7 +36,6 @@ public class UserController {
 		return JSON.parseObject(JSON.toJSONString(user));
 	}
 	
-
 	@RequestMapping("/mybatis-plus/insertUser")
 	@ResponseBody
 	public JSONObject insertUserByMybatisPlus(HttpServletRequest request) throws Exception{
@@ -47,6 +46,16 @@ public class UserController {
 		user.setName("zhengchanglin");
 		userService.insertUserByMybatisPlus(user);
 		return JSON.parseObject(JSON.toJSONString(user));
+	}
+	
+	@RequestMapping("/mybatis-plus/countUser")
+	@ResponseBody
+	public JSONObject countUserByMybatisPlus(HttpServletRequest request) throws Exception{
+		log.info("countUser");
+		JSONObject obj = new JSONObject();
+		Integer size = userService.countUserByMybatisPlus();
+		obj.put("size", size);
+		return obj;
 	}
 
 }

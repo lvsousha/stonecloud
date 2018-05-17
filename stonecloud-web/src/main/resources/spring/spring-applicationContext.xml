@@ -23,7 +23,9 @@
 	<!-- 引入spring注解 -->
 	<context:annotation-config />
 	<!-- 配置注解扫描目录 -->
-	<context:component-scan base-package="com.stone.webapp.**" />
+	<context:component-scan base-package="com.stone.webapp.**" >
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
 	<!-- 支持异步方法执行 -->
 	<task:executor id="myexecutor" pool-size="5" />
 	<task:annotation-driven executor="myexecutor" />
@@ -144,6 +146,21 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true" />
+            <tx:method name="query*" read-only="true" />
+            <tx:method name="select*" read-only="true" />
+            <tx:method name="*" propagation="REQUIRED"  rollback-for="Exception" />
+        </tx:attributes>
+    </tx:advice>
+	<aop:config>
+        <aop:pointcut id="interceptorPointCuts"
+            expression="execution(* com.stone.webapp.service.*.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="interceptorPointCuts" />
+    </aop:config>
+	<aop:aspectj-autoproxy />
+	
 	<!-- enable transaction annotation support -->
 	<tx:annotation-driven transaction-manager="txManager" />
 
