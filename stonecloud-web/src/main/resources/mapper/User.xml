@@ -21,14 +21,15 @@
 						phone,
 						created,
 						updated
-		) values (
+		) select
 					#{name,jdbcType=VARCHAR},
 					#{password,jdbcType=VARCHAR},
 					#{email,jdbcType=VARCHAR},
 					#{phone,jdbcType=VARCHAR},
 					#{created},
 					#{updated}
-		)
+		from dual
+		where not exists(select 1 from users where name=#{name})
 	</insert>
 
     <select id="selectAll" resultMap="userResult">

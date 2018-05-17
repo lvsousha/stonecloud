@@ -17,6 +17,7 @@ public class UserService {
 	
 	public void insertUser(User user){
 		userMapper.insertUser(user);
+		System.out.println("in");
 	}
 	
 	public void insertUserByMybatisPlus(User user){
@@ -26,6 +27,23 @@ public class UserService {
 	
 	public Integer countUserByMybatisPlus(){
 		return userMapper.selectCount(new EntityWrapper<User>());
+	}
+	
+	public User updateName(){
+		User user = userMapper.selectById(2);
+		user.setName("updateName");
+		userMapper.updateById(user);
+		System.out.println("IN");
+		return user;
+	}
+	
+	public User updateEmail(){
+		User user = userMapper.selectById(1);
+		user.setEmail("updateEmail");
+		userMapper.updateById(user);
+		System.out.println(userMapper.selectCount(new EntityWrapper<User>().eq("name", "updateName")));
+		System.out.println("IN");
+		return user;
 	}
 	
 }

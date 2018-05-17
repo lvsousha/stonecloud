@@ -57,5 +57,21 @@ public class UserController {
 		obj.put("size", size);
 		return obj;
 	}
+	
+	@RequestMapping("/mybatis-plus/updateName")
+	@ResponseBody
+	public JSONObject updateName(HttpServletRequest request) throws Exception{
+		log.info("countUser");
+		User user = userService.updateName();
+		return JSON.parseObject(JSON.toJSONString(user));
+	}
+	
+	@RequestMapping("/mybatis-plus/updateEmail")
+	@ResponseBody
+	public JSONObject updateEmail(HttpServletRequest request) throws Exception{
+		log.info("countUser");
+		User user = userService.updateEmail();
+		return JSON.parseObject(JSON.toJSONString(user));
+	}
 
 }
