@@ -30,16 +30,17 @@ public class UserService {
 	}
 	
 	public User updateName(){
-		User user = userMapper.selectById(2);
-		user.setName("updateName");
-		userMapper.updateById(user);
+		User user = userMapper.selectById(11);
+		user.setName("zcl");
+		user.setPassword("123456");
+		userMapper.update(user,new EntityWrapper<User>().eq("name", "updateName"));
 		System.out.println("IN");
 		return user;
 	}
 	
 	public User updateEmail(){
-		User user = userMapper.selectById(1);
-		user.setEmail("updateEmail");
+		User user = userMapper.selectById(11);
+		user.setEmail("updateEmail2");
 		userMapper.updateById(user);
 		System.out.println(userMapper.selectCount(new EntityWrapper<User>().eq("name", "updateName")));
 		System.out.println("IN");
