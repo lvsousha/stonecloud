@@ -9,6 +9,19 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring/spring-applicationContext.xml</param-value> <!-- 加载hibernate和spring配置文件位置 -->
 	</context-param>
+
+	<context-param>
+		<param-name>IgniteConfigurationFilePath</param-name>
+		<param-value>default-config.xml </param-value>
+	</context-param>
+	<context-param>
+		<param-name>IgniteWebSessionsCacheName</param-name>
+		<param-value>partitioned</param-value>
+	</context-param>
+
+	<!-- <listener>
+		<listener-class>org.apache.ignite.startup.servlet.ServletContextListenerStartup</listener-class>
+	</listener> -->
 	<!-- ContextLoaderListener -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -33,7 +46,7 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>test</servlet-name>
 		<servlet-class>com.stone.webapp.servlet.TestServlet</servlet-class>
@@ -42,7 +55,17 @@
 		<servlet-name>test</servlet-name>
 		<url-pattern>/test</url-pattern>
 	</servlet-mapping>
-	
+
+	<!-- <filter>
+		<filter-name>IgniteWebSessionsFilter</filter-name>
+		<filter-class>org.apache.ignite.cache.websession.WebSessionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>IgniteWebSessionsFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
+
+
 	<!-- spring字符集过滤器 -->
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
@@ -64,15 +87,15 @@
 
 	<!-- 连接池 启用 Web 监控统计功能 start -->
 	<filter>
-		<filter-name> DruidWebStatFilter</filter-name >
-		<filter-class> com.alibaba.druid.support.http.WebStatFilter</filter-class>
+		<filter-name>DruidWebStatFilter</filter-name>
+		<filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
 		<init-param>
-			<param-name>exclusions</param-name >
+			<param-name>exclusions</param-name>
 			<param-value> *.js ,*.gif ,*.jpg ,*.png ,*.css ,*.ico ,/druid/*</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>
-		<filter-name> DruidWebStatFilter</filter-name>
+		<filter-name>DruidWebStatFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<servlet>
@@ -80,9 +103,9 @@
 		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name> DruidStatView</servlet-name>
+		<servlet-name>DruidStatView</servlet-name>
 		<url-pattern>/druid/*</url-pattern>
-	</servlet-mapping >
+	</servlet-mapping>
 	<!-- 连接池 启用 Web 监控统计功能 end -->
 	<session-config>
 		<session-timeout>30</session-timeout>
