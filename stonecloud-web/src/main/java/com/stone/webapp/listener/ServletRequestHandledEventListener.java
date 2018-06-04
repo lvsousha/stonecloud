@@ -14,7 +14,7 @@ public class ServletRequestHandledEventListener implements ApplicationListener<S
 	public void onApplicationEvent(ServletRequestHandledEvent event) {
 		String url = event.getRequestUrl();
 		if(url.indexOf("static") == -1){
-			log.info(event.getDescription());
+			log.debug(event.getDescription());
 		}
 //		logger.info(event.getStatusCode());
 		

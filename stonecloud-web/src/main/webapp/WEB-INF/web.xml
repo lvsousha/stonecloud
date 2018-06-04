@@ -19,9 +19,8 @@
 		<param-value>partitioned</param-value>
 	</context-param>
 
-	<!-- <listener>
-		<listener-class>org.apache.ignite.startup.servlet.ServletContextListenerStartup</listener-class>
-	</listener> -->
+	<!-- <listener> <listener-class>org.apache.ignite.startup.servlet.ServletContextListenerStartup</listener-class> 
+		</listener> -->
 	<!-- ContextLoaderListener -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -56,16 +55,18 @@
 		<url-pattern>/test</url-pattern>
 	</servlet-mapping>
 
-	<!-- <filter>
-		<filter-name>IgniteWebSessionsFilter</filter-name>
-		<filter-class>org.apache.ignite.cache.websession.WebSessionFilter</filter-class>
+	<!-- <filter> <filter-name>IgniteWebSessionsFilter</filter-name> <filter-class>org.apache.ignite.cache.websession.WebSessionFilter</filter-class> 
+		</filter> <filter-mapping> <filter-name>IgniteWebSessionsFilter</filter-name> 
+		<url-pattern>/*</url-pattern> </filter-mapping> -->
+
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>IgniteWebSessionsFilter</filter-name>
+		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
-
-
+	</filter-mapping>
 	<!-- spring字符集过滤器 -->
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>

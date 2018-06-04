@@ -24,6 +24,13 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@RequestMapping("/login")
+	@ResponseBody
+	public JSONObject login(HttpServletRequest request) throws Exception{
+		log.info("insertUser");
+		return new JSONObject();
+	}
+	
 	@RequestMapping("/insertUser")
 	@ResponseBody
 	public JSONObject insertUser(HttpServletRequest request) throws Exception{
