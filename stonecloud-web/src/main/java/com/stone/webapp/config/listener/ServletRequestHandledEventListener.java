@@ -1,4 +1,4 @@
-package com.stone.webapp.listener;
+package com.stone.webapp.config.listener;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationListener;

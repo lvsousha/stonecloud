@@ -1,4 +1,4 @@
-package com.stone.webapp.interceptor;
+package com.stone.webapp.config.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

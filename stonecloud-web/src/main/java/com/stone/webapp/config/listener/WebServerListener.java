@@ -1,4 +1,4 @@
-package com.stone.webapp.listener;
+package com.stone.webapp.config.listener;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
