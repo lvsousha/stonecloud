@@ -1,6 +1,7 @@
 package com.stone.webapp.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.stone.webapp.mapper.UserMapper;
 import com.stone.webapp.model.User;
 import com.stone.webapp.service.UserService;
 
@@ -23,6 +25,8 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserMapper userMapper;
 	
 	@RequestMapping("/login")
 	@ResponseBody
@@ -79,6 +83,14 @@ public class UserController {
 		log.info("countUser");
 		User user = userService.updateEmail();
 		return JSON.parseObject(JSON.toJSONString(user));
+	}
+	
+	@RequestMapping("/mybatis-plus/selectUser")
+	@ResponseBody
+	public User selectUser(HttpServletRequest request) throws Exception{
+		log.info("selectUser");
+		List<User> users = userMapper.selectAll();
+		return users.get(0);
 	}
 
 }
