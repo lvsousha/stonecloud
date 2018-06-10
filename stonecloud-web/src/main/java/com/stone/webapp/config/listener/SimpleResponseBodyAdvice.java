@@ -9,8 +9,6 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import com.alibaba.fastjson.JSONObject;
-
 @ControllerAdvice
 public class SimpleResponseBodyAdvice implements ResponseBodyAdvice<Object>{
 
@@ -18,7 +16,8 @@ public class SimpleResponseBodyAdvice implements ResponseBodyAdvice<Object>{
 	
 	@Override
 	public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
-		log.info(returnType);
+		Class<?> clazz = returnType.getClass();
+		log.info(clazz.getName());
 		return true;
 	}
 
@@ -26,7 +25,7 @@ public class SimpleResponseBodyAdvice implements ResponseBodyAdvice<Object>{
 	public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType,
 			Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request,
 			ServerHttpResponse response) {
-		log.info(body);
+//		log.info(body);
 		log.info(body.getClass().getName());
 //		body.put("message", "在SimpleResponseBodyAdvice中修改的");
 		return body;

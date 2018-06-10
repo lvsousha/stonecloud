@@ -2,9 +2,11 @@ package com.stone.webapp.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)			//不包含有null值的字段,即字段值为null的转换为json字符串时会被省略
 @TableName("USERS")
 public class User implements Serializable{
 	
@@ -44,6 +46,7 @@ public class User implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	@JsonProperty("phone")					//设置该字段转换为json后的字段名
 	public String getPhone() {
 		return phone;
 	}

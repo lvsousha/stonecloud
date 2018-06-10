@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.stone.webapp.config.ResultMsg;
 import com.stone.webapp.service.AsyncService;
 
 @Controller
@@ -17,16 +18,16 @@ public class AsyncController {
 	
 	@RequestMapping("/test")
 	@ResponseBody
-	public JSONObject test(){
+	public ResultMsg test(){
 		asyncService.test();
-		return new JSONObject();
+		return ResultMsg.getSuccess(new JSONObject());
 	}
 	
 	@RequestMapping("/asyncReturn")
 	@ResponseBody
-	public JSONObject asyncReturn(){
+	public ResultMsg asyncReturn(){
 		asyncService.testAsyncAnnotationForMethodsWithReturnType();
-		return new JSONObject();
+		return ResultMsg.getSuccess(new JSONObject());
 	}
 
 }

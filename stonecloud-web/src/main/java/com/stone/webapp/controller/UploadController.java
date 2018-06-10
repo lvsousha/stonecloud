@@ -22,6 +22,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.stone.webapp.config.ResultMsg;
 
 @Controller
 @RequestMapping("/content/upload/")
@@ -38,7 +39,7 @@ public class UploadController {
 	
 	@ResponseBody
 	@RequestMapping(value = "getUploadedData")
-	public JSONObject getUploadedData(HttpServletResponse response, HttpServletRequest request, String params) throws Exception {
+	public ResultMsg getUploadedData(HttpServletResponse response, HttpServletRequest request, String params) throws Exception {
 		System.out.println(params);
 		
 		JSONObject object = new JSONObject();
@@ -47,7 +48,7 @@ public class UploadController {
 		object.put("draw", 1);
 		object.put("recordsTotal", 0);
 		object.put("recordsFiltered", 0);
-		return object;
+		return ResultMsg.getSuccess(object);
 	}
 	
 	private void copyFile(CommonsMultipartFile[] files, HttpServletRequest request) throws Exception{

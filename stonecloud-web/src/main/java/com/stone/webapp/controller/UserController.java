@@ -11,8 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.stone.webapp.config.ResultMsg;
+import com.stone.webapp.config.exception.ApiException;
 import com.stone.webapp.mapper.UserMapper;
 import com.stone.webapp.model.User;
 import com.stone.webapp.service.UserService;
@@ -28,69 +29,66 @@ public class UserController {
 	@Autowired
 	private UserMapper userMapper;
 	
-	@RequestMapping("/login")
-	@ResponseBody
-	public JSONObject login(HttpServletRequest request) throws Exception{
-		log.info("insertUser");
-		return new JSONObject();
-	}
-	
 	@RequestMapping("/insertUser")
 	@ResponseBody
-	public JSONObject insertUser(HttpServletRequest request) throws Exception{
+	public ResultMsg insertUser(HttpServletRequest request) throws Exception{
 		log.info("insertUser");
 		User user = new User();
 		user.setCreated(new Date());
 		user.setUpdated(new Date());
 		user.setName("zhengchanglin");
 		userService.insertUser(user);
-		return JSON.parseObject(JSON.toJSONString(user));
+		return ResultMsg.getSuccess(user);
 	}
 	
 	@RequestMapping("/mybatis-plus/insertUser")
 	@ResponseBody
-	public JSONObject insertUserByMybatisPlus(HttpServletRequest request) throws Exception{
+	public ResultMsg insertUserByMybatisPlus(HttpServletRequest request) throws Exception{
 		log.info("insertUser");
 		User user = new User();
 		user.setCreated(new Date());
 		user.setUpdated(new Date());
 		user.setName("zhengchanglin");
 		userService.insertUserByMybatisPlus(user);
-		return JSON.parseObject(JSON.toJSONString(user));
+		return ResultMsg.getSuccess(user);
 	}
 	
 	@RequestMapping("/mybatis-plus/countUser")
 	@ResponseBody
-	public JSONObject countUserByMybatisPlus(HttpServletRequest request) throws Exception{
+	public ResultMsg countUserByMybatisPlus(HttpServletRequest request) throws Exception{
 		log.info("countUser");
 		JSONObject obj = new JSONObject();
 		Integer size = userService.countUserByMybatisPlus();
 		obj.put("size", size);
-		return obj;
+		return ResultMsg.getSuccess(obj);
 	}
 	
 	@RequestMapping("/mybatis-plus/updateName")
 	@ResponseBody
-	public JSONObject updateName(HttpServletRequest request) throws Exception{
+	public ResultMsg updateName(HttpServletRequest request) throws Exception{
 		log.info("countUser");
 		User user = userService.updateName();
-		return JSON.parseObject(JSON.toJSONString(user));
+		return ResultMsg.getSuccess(user);
 	}
 	
 	@RequestMapping("/mybatis-plus/updateEmail")
 	@ResponseBody
-	public JSONObject updateEmail(HttpServletRequest request) throws Exception{
+	public ResultMsg updateEmail(HttpServletRequest request) throws Exception{
 		log.info("countUser");
 		User user = userService.updateEmail();
-		return JSON.parseObject(JSON.toJSONString(user));
+		return ResultMsg.getSuccess(user);
 	}
 	
 	@RequestMapping("/mybatis-plus/selectUser")
 	@ResponseBody
-	public User selectUser(HttpServletRequest request) throws Exception{
+	public ResultMsg selectUser(HttpServletRequest request) throws Exception{
 		log.info("selectUser");
 		List<User> users = userMapper.selectAll();
-		return users.get(0);
+		Boolean flag = true;
+		if(flag){
+			throw new ApiException(ResultMsg.FAIL);
+		}
+		return ResultMsg.getSuccess(users);
 	}
 
 }
