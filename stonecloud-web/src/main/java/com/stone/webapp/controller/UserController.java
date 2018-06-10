@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.stone.webapp.config.BasicConfigBean;
 import com.stone.webapp.config.ResultMsg;
 import com.stone.webapp.config.exception.ApiException;
 import com.stone.webapp.mapper.UserMapper;
@@ -24,7 +25,8 @@ import com.stone.webapp.service.UserService;
 public class UserController {
 	
 	private Logger log = LoggerFactory.getLogger(this.getClass());
-	
+	@Autowired
+	private BasicConfigBean configBean;
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -84,8 +86,9 @@ public class UserController {
 	@ResponseBody
 	public ResultMsg selectUser(HttpServletRequest request) throws Exception{
 		log.info("selectUser");
+		log.info(configBean.getName());
 		List<User> users = userMapper.selectAll();
-		Boolean flag = true;
+		Boolean flag = false;
 		if(flag){
 			throw new ApiException(ResultMsg.FAIL);
 		}
