@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import com.alibaba.fastjson.JSONObject;
 
 @ControllerAdvice
-public class SimpleResponseBodyAdvice implements ResponseBodyAdvice<JSONObject>{
+public class SimpleResponseBodyAdvice implements ResponseBodyAdvice<Object>{
 
 	private Logger log = Logger.getLogger(this.getClass());
 	
@@ -23,11 +23,12 @@ public class SimpleResponseBodyAdvice implements ResponseBodyAdvice<JSONObject>{
 	}
 
 	@Override
-	public JSONObject beforeBodyWrite(JSONObject body, MethodParameter returnType, MediaType selectedContentType,
+	public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType,
 			Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request,
 			ServerHttpResponse response) {
 		log.info(body);
-		body.put("message", "在SimpleResponseBodyAdvice中修改的");
+		log.info(body.getClass().getName());
+//		body.put("message", "在SimpleResponseBodyAdvice中修改的");
 		return body;
 	}
 
