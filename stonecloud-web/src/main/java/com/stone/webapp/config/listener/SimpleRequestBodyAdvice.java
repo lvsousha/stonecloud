@@ -6,7 +6,8 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -17,8 +18,8 @@ import com.alibaba.fastjson.JSONObject;
 
 @ControllerAdvice
 public class SimpleRequestBodyAdvice implements RequestBodyAdvice{
-
-	private Logger log = Logger.getLogger(this.getClass());
+	
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Override
 	public boolean supports(MethodParameter methodParameter, Type targetType,
@@ -33,7 +34,7 @@ public class SimpleRequestBodyAdvice implements RequestBodyAdvice{
 	public Object handleEmptyBody(Object body, HttpInputMessage inputMessage, MethodParameter parameter,
 			Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
 		// TODO Auto-generated method stub
-		log.info(body);
+		log.info("",body);
 		return body;
 	}
 
@@ -41,7 +42,7 @@ public class SimpleRequestBodyAdvice implements RequestBodyAdvice{
 	public HttpInputMessage beforeBodyRead(HttpInputMessage inputMessage, MethodParameter parameter, Type targetType,
 			Class<? extends HttpMessageConverter<?>> converterType) throws IOException {
 		// TODO Auto-generated method stub
-		log.info(inputMessage.getClass());
+		log.info("",inputMessage.getClass());
 		StringBuffer sb = new StringBuffer();
 		byte[] b = new byte[1024];
 		InputStream is = inputMessage.getBody();
@@ -69,7 +70,7 @@ public class SimpleRequestBodyAdvice implements RequestBodyAdvice{
 	public Object afterBodyRead(Object body, HttpInputMessage inputMessage, MethodParameter parameter, Type targetType,
 			Class<? extends HttpMessageConverter<?>> converterType) {
 		// TODO Auto-generated method stub
-		log.info(body);
+		log.info("",body);
 		return body;
 	}
 	

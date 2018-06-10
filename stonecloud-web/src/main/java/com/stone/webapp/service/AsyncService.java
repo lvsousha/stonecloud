@@ -2,15 +2,16 @@ package com.stone.webapp.service;
 
 import java.util.concurrent.Future;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AsyncService {
-
-	private Logger log = Logger.getLogger(this.getClass());
+	
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Async
 	public void test() {

@@ -3,15 +3,16 @@ package com.stone.webapp.config.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 @Component
 public class RequestInterceptor implements HandlerInterceptor{
-
-	private Logger log = Logger.getLogger(this.getClass());
+	
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) throws Exception {

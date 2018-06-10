@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +29,7 @@ import com.stone.webapp.config.ResultMsg;
 @RequestMapping("/content/upload/")
 public class UploadController {
 	
-	private Logger log = Logger.getLogger(this.getClass());
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 	private static final int BUFFER_SIZE = 2 * 1024;
 	
 	@RequestMapping(value = "upload")
@@ -94,13 +95,13 @@ public class UploadController {
 				out.write(buffer, 0, len);
 			}
 		} catch (Exception e) {
-			log.error(destFile,e);
+			log.error(destFile.getAbsolutePath(),e);
 		} finally {
 			try {
 				in.close();
 				out.close();
 			} catch (IOException e) {
-				log.error(destFile,e);;
+				log.error(destFile.getAbsolutePath(),e);;
 			}
 		}
 	}

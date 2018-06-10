@@ -5,7 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ import com.stone.webapp.service.UserService;
 @RequestMapping("/user")
 public class UserController {
 	
-	private Logger log = Logger.getLogger(this.getClass());
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private UserService userService;

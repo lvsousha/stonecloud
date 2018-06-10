@@ -3,11 +3,12 @@ package com.stone.webapp.config.listener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PrivateHttpSessionListener implements HttpSessionListener {
-
-	private Logger log = Logger.getLogger(this.getClass());
+	
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 	@Override
 	public void sessionCreated(HttpSessionEvent se) {
 		log.info(se.getSession().getCreationTime()+":session 创建");

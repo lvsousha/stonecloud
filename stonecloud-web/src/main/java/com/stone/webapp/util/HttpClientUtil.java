@@ -14,11 +14,12 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HttpClientUtil {
 	
-	private static Logger log = Logger.getRootLogger();
+	private static Logger log = LoggerFactory.getLogger(HttpClientUtil.class);
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -47,7 +48,7 @@ public class HttpClientUtil {
             log.info("executing request " + httppost.getRequestLine());  
             CloseableHttpResponse response = httpclient.execute(httppost);  
             try {  
-                log.info(response.getStatusLine());  
+                log.info("",response.getStatusLine());  
                 HttpEntity repEntity = response.getEntity();  
                 if (repEntity != null) {  
                 	log.info(EntityUtils.toString(repEntity));

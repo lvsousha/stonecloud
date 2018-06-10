@@ -1,14 +1,15 @@
 package com.stone.webapp.config.listener;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.ServletRequestHandledEvent;
 
 @Component
 public class ServletRequestHandledEventListener implements ApplicationListener<ServletRequestHandledEvent>{
-
-	private Logger log = Logger.getLogger(this.getClass());
+	
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public void onApplicationEvent(ServletRequestHandledEvent event) {
