@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF8"?>
+
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	You under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- Alter configuration below as needed. -->
+	<!-- Ignite实例 -->
+	<bean class="com.stone.webapp.util.ignite.CustomerJdbcIpFinderDialect"
+		id="customerJdbcIpFinderDialect">
+		<constructor-arg name="tableName" value="CUSTOMER_FINDER"></constructor-arg>
+	</bean>
+	
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		id="igniteDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/test"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+	<bean class="org.apache.ignite.configuration.IgniteConfiguration">
+		<!-- 客户端模式设置，为true时开启客户端模式 -->
+		<!--<property name="clientMode" value="false"/> -->
+		<property name="peerClassLoadingEnabled" value="true" />
+		<property name="metricsLogFrequency" value="0" />
+		<property name="cacheConfiguration">
+			<bean class="org.apache.ignite.configuration.CacheConfiguration">
+				<property name="name" value="personCache" />
+				<property name="cacheMode" value="PARTITIONED" />
+				<property name="backups" value="1" />
+			</bean>
+		</property>
+		<property name="discoverySpi">
+			<bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
+				<property name="ipFinder">
+					<bean
+						class="org.apache.ignite.spi.discovery.tcp.ipfinder.jdbc.TcpDiscoveryJdbcIpFinder">
+						<constructor-arg name="jdbcDialect" ref="customerJdbcIpFinderDialect"></constructor-arg>
+						<property name="dataSource" ref="igniteDataSource" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="communicationSpi">
+			<bean class="org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi">
+				<property name="localPort" value="47100" />
+				<property name="connectTimeout" value="10000" />
+			</bean>
+		</property>
+	</bean>
+</beans>

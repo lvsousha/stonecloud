@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.stone.webapp.config.BasicConfigBean;
 import com.stone.webapp.config.ResultMsg;
-import com.stone.webapp.config.exception.ApiException;
 import com.stone.webapp.mapper.UserMapper;
 import com.stone.webapp.model.User;
 import com.stone.webapp.service.UserService;
@@ -93,6 +92,21 @@ public class UserController {
 			throw new Exception("Exception");
 		}
 		return ResultMsg.buildSuccess(users);
+	}
+	
+	@RequestMapping("/setSession")
+	@ResponseBody
+	public ResultMsg setSession(HttpServletRequest request) throws Exception{
+		log.info("setSession");
+		request.getSession(true).setAttribute("session", "session");
+		return ResultMsg.buildSuccess(request.getSession().getId());
+	}
+	
+	@RequestMapping("/getSession")
+	@ResponseBody
+	public ResultMsg getSession(HttpServletRequest request) throws Exception{
+		log.info("getSession");
+		return ResultMsg.buildSuccess(request.getSession().getAttribute("session").toString());
 	}
 
 }

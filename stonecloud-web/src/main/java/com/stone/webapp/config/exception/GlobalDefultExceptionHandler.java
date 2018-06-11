@@ -33,7 +33,7 @@ public class GlobalDefultExceptionHandler {
 	
 	@ExceptionHandler(Exception.class)  
     public Object defultExcepitonHandler(HttpServletRequest req, Exception e) throws IOException {  
-		log.error("Exception");
+		log.error("Exception", e);
 		StringPrintWriter spw = new StringPrintWriter();
 		e.printStackTrace(spw);
 		String errorContent = spw.getString();

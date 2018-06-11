@@ -12,15 +12,14 @@
 
 	<context-param>
 		<param-name>IgniteConfigurationFilePath</param-name>
-		<param-value>default-config.xml </param-value>
+		<param-value>jdbc-config.xml </param-value>
 	</context-param>
 	<context-param>
 		<param-name>IgniteWebSessionsCacheName</param-name>
 		<param-value>partitioned</param-value>
 	</context-param>
 
-	<!-- <listener> <listener-class>org.apache.ignite.startup.servlet.ServletContextListenerStartup</listener-class> 
-		</listener> -->
+	
 	<!-- ContextLoaderListener -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -31,6 +30,11 @@
 	<listener>
 		<listener-class>com.stone.webapp.config.listener.PrivateHttpSessionListener</listener-class>
 	</listener>
+	
+	<listener>
+		<listener-class>org.apache.ignite.startup.servlet.ServletContextListenerStartup</listener-class>
+	</listener>
+	
 	<!-- servlet.DispatcherServlet -->
 	<servlet>
 		<servlet-name>spring</servlet-name>
@@ -59,14 +63,9 @@
 		</filter> <filter-mapping> <filter-name>IgniteWebSessionsFilter</filter-name> 
 		<url-pattern>/*</url-pattern> </filter-mapping> -->
 
-	<!-- <filter>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
+	<!-- <filter> <filter-name>springSecurityFilterChain</filter-name> <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> 
+		</filter> <filter-mapping> <filter-name>springSecurityFilterChain</filter-name> 
+		<url-pattern>/*</url-pattern> </filter-mapping> -->
 	<!-- spring字符集过滤器 -->
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>

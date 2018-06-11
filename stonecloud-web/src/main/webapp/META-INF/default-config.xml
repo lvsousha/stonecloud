@@ -30,9 +30,10 @@
         <!-- 客户端模式设置，为true时开启客户端模式 -->
         <!--<property name="clientMode" value="false"/>-->
         <property name="peerClassLoadingEnabled" value="true"/>
+        <property name="metricsLogFrequency" value="0"/>
         <property name="cacheConfiguration">
             <bean class="org.apache.ignite.configuration.CacheConfiguration">
-                <property name="name" value="partitioned"/>
+                <property name="name" value="personCache"/>
                 <property name="cacheMode" value="PARTITIONED"/>
                 <property name="backups" value="1"/>
             </bean>
