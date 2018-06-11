@@ -49,7 +49,7 @@ public class UploadController {
 		object.put("draw", 1);
 		object.put("recordsTotal", 0);
 		object.put("recordsFiltered", 0);
-		return ResultMsg.getSuccess(object);
+		return ResultMsg.buildSuccess(object);
 	}
 	
 	private void copyFile(CommonsMultipartFile[] files, HttpServletRequest request) throws Exception{

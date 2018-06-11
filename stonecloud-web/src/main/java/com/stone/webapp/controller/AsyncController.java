@@ -20,14 +20,14 @@ public class AsyncController {
 	@ResponseBody
 	public ResultMsg test(){
 		asyncService.test();
-		return ResultMsg.getSuccess(new JSONObject());
+		return ResultMsg.buildSuccess(new JSONObject());
 	}
 	
 	@RequestMapping("/asyncReturn")
 	@ResponseBody
 	public ResultMsg asyncReturn(){
 		asyncService.testAsyncAnnotationForMethodsWithReturnType();
-		return ResultMsg.getSuccess(new JSONObject());
+		return ResultMsg.buildSuccess(new JSONObject());
 	}
 
 }

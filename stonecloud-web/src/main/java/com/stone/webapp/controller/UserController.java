@@ -41,7 +41,7 @@ public class UserController {
 		user.setUpdated(new Date());
 		user.setName("zhengchanglin");
 		userService.insertUser(user);
-		return ResultMsg.getSuccess(user);
+		return ResultMsg.buildSuccess(user);
 	}
 	
 	@RequestMapping("/mybatis-plus/insertUser")
@@ -53,7 +53,7 @@ public class UserController {
 		user.setUpdated(new Date());
 		user.setName("zhengchanglin");
 		userService.insertUserByMybatisPlus(user);
-		return ResultMsg.getSuccess(user);
+		return ResultMsg.buildSuccess(user);
 	}
 	
 	@RequestMapping("/mybatis-plus/countUser")
@@ -63,7 +63,7 @@ public class UserController {
 		JSONObject obj = new JSONObject();
 		Integer size = userService.countUserByMybatisPlus();
 		obj.put("size", size);
-		return ResultMsg.getSuccess(obj);
+		return ResultMsg.buildSuccess(obj);
 	}
 	
 	@RequestMapping("/mybatis-plus/updateName")
@@ -71,7 +71,7 @@ public class UserController {
 	public ResultMsg updateName(HttpServletRequest request) throws Exception{
 		log.info("countUser");
 		User user = userService.updateName();
-		return ResultMsg.getSuccess(user);
+		return ResultMsg.buildSuccess(user);
 	}
 	
 	@RequestMapping("/mybatis-plus/updateEmail")
@@ -79,7 +79,7 @@ public class UserController {
 	public ResultMsg updateEmail(HttpServletRequest request) throws Exception{
 		log.info("countUser");
 		User user = userService.updateEmail();
-		return ResultMsg.getSuccess(user);
+		return ResultMsg.buildSuccess(user);
 	}
 	
 	@RequestMapping("/mybatis-plus/selectUser")
@@ -88,11 +88,11 @@ public class UserController {
 		log.info("selectUser");
 		log.info(configBean.getName());
 		List<User> users = userMapper.selectAll();
-		Boolean flag = false;
+		Boolean flag = true;
 		if(flag){
-			throw new ApiException(ResultMsg.FAIL);
+			throw new Exception("Exception");
 		}
-		return ResultMsg.getSuccess(users);
+		return ResultMsg.buildSuccess(users);
 	}
 
 }

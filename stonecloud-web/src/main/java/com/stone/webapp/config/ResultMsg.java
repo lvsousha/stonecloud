@@ -17,12 +17,12 @@ public class ResultMsg {
 		this.setResult(result);
 	}
 	
-	public static ResultMsg getSuccess(Object result){
+	public static ResultMsg buildSuccess(Object result){
 		return new ResultMsg("200", "操作成功", result);
 	}
 	
-	public static ResultMsg getFail(Object result){
-		return FAIL;
+	public static ResultMsg buildFail(Object result){
+		return new ResultMsg("500", "操作失败", result);
 	}
 
 	public String getCode() {
