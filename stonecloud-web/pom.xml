@@ -205,6 +205,9 @@
 
 	</dependencies>
 	<build>
+		<filters>
+	      <filter>src/main/resources/config/${profileActive}/ignite-config.properties</filter><!--基础文件-->
+	    </filters>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>

@@ -33,26 +33,19 @@
 	>
 	<!-- Alter configuration below as needed. -->
 	<!-- Ignite实例 -->
-	<bean id="customizedPropertyConfigurer" class="com.stone.webapp.config.CustomizedPropertyConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:${properties.path}/ignite-config.properties</value>
-            </list>
-        </property>
-    </bean>
 	
-	<!-- <context:property-placeholder location="classpath:${properties.path}/ignite-config.properties" /> -->
+	<context:property-placeholder location="classpath:config/ignite.properties" />
 	<bean class="com.stone.webapp.util.ignite.CustomerJdbcIpFinderDialect"
 		id="customerJdbcIpFinderDialect">
-		<constructor-arg name="tableName" value="${tableName}"></constructor-arg>
+		<constructor-arg name="tableName" value="${ignite.tableName}"></constructor-arg>
 	</bean>
 	
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		id="igniteDataSource">
-		<property name="driverClassName" value="${jdbc.driverClassName}"></property>
-		<property name="url" value="${jdbc.url}"></property>
-		<property name="username" value="${jdbc.username}"></property>
-		<property name="password" value="${jdbc.password}"></property>
+		<property name="driverClassName" value="${ignite.jdbc.driverClassName}"></property>
+		<property name="url" value="${ignite.jdbc.url}"></property>
+		<property name="username" value="${ignite.jdbc.username}"></property>
+		<property name="password" value="${ignite.jdbc.password}"></property>
 	</bean>
 	<bean class="org.apache.ignite.configuration.IgniteConfiguration">
 		<!-- 客户端模式设置，为true时开启客户端模式 -->
@@ -61,7 +54,7 @@
 		<property name="metricsLogFrequency" value="0" />
 		<property name="cacheConfiguration">
 			<bean class="org.apache.ignite.configuration.CacheConfiguration">
-				<property name="name" value="${cacheName}" />
+				<property name="name" value="${ignite.cacheName}" />
 				<property name="cacheMode" value="PARTITIONED" />
 				<property name="backups" value="1" />
 			</bean>

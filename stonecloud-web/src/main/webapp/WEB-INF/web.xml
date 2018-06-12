@@ -10,10 +10,16 @@
 		<param-value>classpath:spring/spring-applicationContext.xml</param-value> <!-- 加载hibernate和spring配置文件位置 -->
 	</context-param>
 
-	<context-param>
+	<!-- <context-param>
 		<param-name>IgniteConfigurationFilePath</param-name>
 		<param-value>../config/ignite/jdbc-config.xml</param-value>
+	</context-param> -->
+	
+	<context-param>
+		<param-name>IgniteConfigurationFilePath</param-name>
+		<param-value>jdbc-config.xml</param-value>
 	</context-param>
+	
 	<context-param>
 		<param-name>IgniteWebSessionsCacheName</param-name>
 		<param-value>stoneCache</param-value>
