@@ -33,15 +33,8 @@
 	>
 	<!-- Alter configuration below as needed. -->
 	<!-- Ignite实例 -->
-	<bean id="customizedPropertyConfigurer" class="com.stone.webapp.config.CustomizedPropertyConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:${properties.path}/ignite-config.properties</value>
-            </list>
-        </property>
-    </bean>
 	
-	<!-- <context:property-placeholder location="classpath:${properties.path}/ignite-config.properties" /> -->
+	<context:property-placeholder location="classpath:config/${profileActive}/ignite-config.properties" />
 	<bean class="com.stone.webapp.util.ignite.CustomerJdbcIpFinderDialect"
 		id="customerJdbcIpFinderDialect">
 		<constructor-arg name="tableName" value="${tableName}"></constructor-arg>

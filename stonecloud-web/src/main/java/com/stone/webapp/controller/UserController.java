@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ignite.internal.websession.WebSessionEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.stone.webapp.config.ResultMsg;
 import com.stone.webapp.mapper.UserMapper;
 import com.stone.webapp.model.User;
 import com.stone.webapp.service.UserService;
+import com.stone.webapp.util.ignite.IgniteUtil;
 
 @Controller
 @RequestMapping("/user")
@@ -106,6 +108,8 @@ public class UserController {
 	@ResponseBody
 	public ResultMsg getSession(HttpServletRequest request) throws Exception{
 		log.info("getSession");
+		WebSessionEntity session = (WebSessionEntity) IgniteUtil.getCacheObj(request.getSession().getId());
+		log.info(new String(session.attributes().get("session")));
 		return ResultMsg.buildSuccess(request.getSession().getAttribute("session").toString());
 	}
 
