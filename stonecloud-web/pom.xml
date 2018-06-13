@@ -84,28 +84,21 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.25</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4j.version}</version>
-		</dependency>  
-		<dependency>  
-		    <groupId>org.slf4j</groupId>  
-		    <artifactId>slf4j-simple</artifactId>  
-		    <version>1.7.25</version>  
-		</dependency>-->
-		<dependency>  
-	        <groupId>org.slf4j</groupId>  
-	        <artifactId>slf4j-api</artifactId>  
-	        <version>1.7.25</version>  
+		<!-- <dependency> <groupId>log4j</groupId> <artifactId>log4j</artifactId> 
+			<version>${log4j.version}</version> </dependency> <dependency> <groupId>org.slf4j</groupId> 
+			<artifactId>slf4j-simple</artifactId> <version>1.7.25</version> </dependency> -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
 		<dependency>
-		    <groupId>org.slf4j</groupId>
-		    <artifactId>slf4j-log4j12</artifactId>
-		    <version>1.7.25</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.25</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
@@ -192,22 +185,31 @@
 
 		<!-- 返回对象自动转json -->
 		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-		    <version>2.9.5</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.5</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-		    <version>2.9.5</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.5</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.18</version>
+			<scope>provided</scope>
+		</dependency>
+
 
 
 	</dependencies>
 	<build>
 		<filters>
-	      <filter>src/main/resources/config/${profileActive}/ignite-config.properties</filter><!--基础文件-->
-	    </filters>
+			<filter>src/main/resources/config/${profileActive}/ignite-config.properties</filter><!--基础文件 -->
+		</filters>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -260,6 +262,6 @@
 				<properties.path>/config/test</properties.path>
 			</properties>
 		</profile>
-		
+
 	</profiles>
 </project>
